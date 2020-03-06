@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiao.dao.PoemDao">
+
+    <resultMap id="PAC" type="Poem">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="author" property="author" />
+        <result column="type" property="type" />
+        <result column="content" property="content" />
+        <result column="href" property="href" />
+        <result column="authordes" property="authordes" />
+        <result column="origin" property="origin" />
+        <result column="cid" property="categoryId" />
+<!--        <association property="categorys" javaType="Category">-->
+<!--            <id column="cid" property="id" />-->
+<!--            <result column="cname" property="name" />-->
+<!--        </association>-->
+    </resultMap>
+
+    <select id="findAll" resultMap="PAC">
+        select id,name,author,type,content,href,authordes,origin,categoryId cid
+        from t_poem
+    </select>
+    <insert id="add">
+        insert into t_poem values(
+        #{id},#{name},#{author},#{type},#{content},#{href},#{authordes},
+        #{origin},#{categoryId})
+    </insert>
+    <update id="update">
+        update t_poem
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="author!=null">author=#{author},</if>
+            <if test="type!=null">type=#{type},</if>
+            <if test="content!=null">content=#{content},</if>
+            <if test="href!=null">href=#{href},</if>
+            <if test="authordes!=null">authordes=#{authordes},</if>
+            <if test="origin!=null">origin=#{origin},</if>
+            <if test="categoryId!=null">categoryId=#{categoryId}</if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="delete">
+        delete from t_poem
+        where id=#{id}
+    </delete>
+    <select id="findByPage" resultMap="PAC">
+        select id,name,author,type,content,href,authordes,origin,categoryId cid
+        from t_poem
+        limit #{start} ,#{size}
+    </select>
+    <select id="findCounts" resultType="java.lang.Integer">
+     select count(id)
+      from t_poem
+    </select>
+
+    <select id="findMH" resultMap="PAC">
+        select id,name,author,type,content,href,authordes,origin,categoryId cid
+        from t_poem
+        <where>
+            <if test="searchOper=='eq'">
+                ${searchField} = #{searchString}
+            </if>
+            <if test="searchOper=='ne'">
+                ${searchField} != #{searchString}
+            </if>
+            <if test="searchOper=='cn'">
+                ${searchField} like concat('%',#{searchString},'%')
+            </if>
+        </where>
+        limit #{start} ,#{size}
+    </select>
+    <select id="findMHC" resultType="java.lang.Integer">
+        select count(id)
+        from t_poem
+        <where>
+            <if test="searchOper=='eq'">
+                ${searchField} = #{searchString}
+            </if>
+            <if test="searchOper=='ne'">
+                ${searchField} != #{searchString}
+            </if>
+            <if test="searchOper=='cn'">
+                ${searchField} like concat('%',#{searchString},'%')
+            </if>
+        </where>
+    </select>
+
+
+</mapper>
