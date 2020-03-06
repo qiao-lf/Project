@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="springes:war">
+    <output-path>$PROJECT_DIR$/springes/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>springes</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="springes.war">
+      <element id="artifact" artifact-name="springes:war exploded" />
+    </root>
+  </artifact>
+</component>

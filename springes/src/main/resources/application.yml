@@ -1,0 +1,11 @@
+server:
+  port: 8989
+  servlet:
+    context-path: /spinges
+    jsp:
+      init-parameters:
+        development: true
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 192.168.117.132:9300
