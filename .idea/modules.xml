@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TangSong/TangSong.iml" filepath="$PROJECT_DIR$/TangSong/TangSong.iml" />
-      <module fileurl="file://$PROJECT_DIR$/springes/springes.iml" filepath="$PROJECT_DIR$/springes/springes.iml" />
     </modules>
   </component>
 </project>
